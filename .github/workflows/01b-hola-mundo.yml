@@ -1,12 +1,13 @@
 # This is a basic workflow that is manually triggered
 
-name: 01a Hola miundo
+name: 01b Hola miundo
 
 on:
+  workflow_dispatch:
   push:
    branches:
-     - main,
-     - feature/**
+     - 'main',
+     - 'feature/**'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -14,5 +15,5 @@ jobs:
   hola-mundo:
     runs-on: ubuntu-latest
     steps:
-    - name: Hola mundo
+    - name: Hola Alberto
       run: echo "Hola, Alberto"
