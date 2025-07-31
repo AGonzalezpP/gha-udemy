@@ -17,5 +17,5 @@ jobs:
   hola-mundo:
     runs-on: ubuntu-latest
     steps:
-    - name: Hola issues
+    - name: Hola issues.2
       run: echo "Hola, Alberto con issues"
