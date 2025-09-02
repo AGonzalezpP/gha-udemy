@@ -13,9 +13,12 @@ jobs:
       - uses: actions/checkout@v5
       - name: Check Node.js version
         run: node --version
-      - name: Install jsolint
+      - name: Install node and npm
         run: |
           sudo apt update
-          sudo apt install jsonlint
+          sudo apt install -y nodejs npm
+      - name: install jsolint
+        run: |
+          run: sudo npm install -g jsonlint
       - name: lint json
         run: jsonlint package.json
