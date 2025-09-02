@@ -1,0 +1,21 @@
+name: 04b - instalar paquetes
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Check Node.js version
+        run: node --version
+      - name: Install jsolint
+        run: 
+          sudo apt-get update
+          sudo apt-get install jsolint
+      - name: lint json
+        run: jsonlint-php package.json
