@@ -14,7 +14,7 @@ jobs:
       - name: Check Node.js version
         run: node --version
       - name: Install jsolint
-        run: 
+        run: |
           sudo apt-get update
           sudo apt-get install jsolint
       - name: lint json
