@@ -15,7 +15,7 @@ jobs:
         run: node --version
       - name: Install jsolint
         run: |
-          sudo apt-get update
-          sudo apt-get install -g jsolint
+          sudo apt update
+          sudo apt install jsonlint
       - name: lint json
-        run: jsonlint-php package.json
+        run: jsonlint package.json
