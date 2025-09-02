@@ -18,7 +18,7 @@ jobs:
           sudo apt update
           sudo apt install -y nodejs npm
       - name: install jsolint
-        run: |
-          run: sudo npm install -g jsonlint
+        run:
+          sudo npm install -g jsonlint
       - name: lint json
         run: jsonlint package.json
