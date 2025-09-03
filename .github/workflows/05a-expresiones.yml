@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: runner OS
         id: runnerOS
-        run: echo "${{ toJson(runner.os) }}"
+        run: echo "${{ runner.os }}"
       - name: runner Architecture
         id: runnerArch
-        run: echo "${{ toJson(runner.arch) }}"
+        run: echo "${{ runner.arch }}"
