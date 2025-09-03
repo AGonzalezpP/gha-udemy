@@ -1,4 +1,4 @@
-name: 05a - Expresiones
+name: 05b - Runner
 
 on:
   push:
@@ -10,19 +10,9 @@ jobs:
   expresiones:
     runs-on: ubuntu-latest
     steps:
-      - name: Operadores
-        id: operadores
-        run: echo "${{ 2 > 1 }}"
-      - name: Inspeccionar github
-        id: gihubContext
-        run: echo "${{ toJson(github) }}"
-      - name: Evento y actor
-        id: eventoActor
-        run: |
-          echo "Evento disparador: ${{ github.event_name }}"
-          echo "Lanzado por: ${{ github.actor }}"
-      - name: Filtro de objeto
-        id: stepsContext
-        run: |
-          echo "${{ toJson(steps) }}"
-          echo "${{ join (steps.*.conclusion) }}"
+      - name: runner OS
+        id: runnerOS
+        run: echo "${{ toJson(runner.os) }}"
+      - name: runner Architecture
+        id: runnerArch
+        run: echo "${{ toJson(runner.arch) }}"
