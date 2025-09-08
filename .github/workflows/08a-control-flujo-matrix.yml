@@ -12,7 +12,7 @@ jobs:
         os: [ubuntu-22.04, ubuntu-20.04]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v4
       - name: Setup node enviroment
         uses: actions/setup-node@v3
         with:
