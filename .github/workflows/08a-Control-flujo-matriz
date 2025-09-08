@@ -1,8 +1,8 @@
 name: 08a - Control de flujo - Matriz.
 on: 
   push:
-  branches:
-    - main
+    branches:
+      - main
   workflow_dispatch:
 jobs:
   build:
