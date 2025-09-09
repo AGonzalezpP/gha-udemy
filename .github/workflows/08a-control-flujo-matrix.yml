@@ -11,6 +11,9 @@ jobs:
       matrix:
         node: [18, 20]
         os: [ubuntu-22.04, ubuntu-latest]
+        exclude:
+          - node: 20
+            os: ubuntu-22.04
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
