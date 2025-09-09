@@ -1,0 +1,43 @@
+name: 09b - Artefactos
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Asignar version de node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Instalar dependencias
+        run: npm ci
+      - name: Lanzar pruebas
+        run: npm test
+      - name: Archivar reporte de cobertura
+        uses: actions/upload-artifact@v4
+        with:
+          name: cobertura
+          path: |
+            coverage/**/index.html
+  resumen:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Rdescargar reporte de cobertura
+        uses: actions/download-artifact@v4
+        with:
+          name: cobertura
+      - name: Mostrar la esctructura de los ficheros descargados
+        run: ls -R
+      - name: HTML a Markdown
+        id: html-to-md
+        uses: rknight/html-to-markdown@v1
+        with:
+          html-file: "lcov-report/index.html"
+      - name: Escribir el resumen
+        run: |
+          echo "# Reporte de cobertura" >> $GITHUB_STEP_SUMMARY
+          cat ${{ steps.html-to-md.outputs.markdown }} >> $GITHUB_STEP_SUMMARY
