@@ -1,0 +1,35 @@
+name: 09c - Artefactos Múltiples
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+jobs:
+  tirar-dados:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generar dado 1
+        id: dado1
+        run: echo "dado1=$((1 + RANDOM % 6))" >> dado1.txt
+      - name: Generar dado 2
+        id: dado2
+        run: echo "dado2=$((1 + RANDOM % 6))" >> dado2.txt
+      - name: Archivar dados
+        uses: actions/upload-artifact@v4
+        with:
+          name: dados
+          path: |
+            dado1.txt
+            dado2.txt
+  resumen:
+    runs-on: ubuntu-latest
+    needs: tirar-dados
+    steps:
+      - name: Descargar dados
+        uses: actions/download-artifact@v4
+        with:
+          name: dados
+      - name: Escribir resumen
+        run: |
+          echo "# :game_die: El resultado de la tirada es:" >> $GITHUB_STEP_SUMMARY
+          echo "Dado 1 $(cat dado1.txt | cut -d '=' -f2)" >> $GITHUB_STEP_SUMMARY
+          echo "Dado 2 $(cat dado2.txt | cut -d '=' -f2)" >> $GITHUB_STEP_SUMMARY
