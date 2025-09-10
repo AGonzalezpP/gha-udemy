@@ -40,4 +40,4 @@ jobs:
       - name: Escribir el resumen
         run: |
           echo "# Reporte de cobertura" >> $GITHUB_STEP_SUMMARY
-          cat ${{ steps.html-to-md.outputs.markdown }} >> $GITHUB_STEP_SUMMARY
+          cat ${{ steps.html-to-md.outputs.markdown-file }} >> $GITHUB_STEP_SUMMARY
