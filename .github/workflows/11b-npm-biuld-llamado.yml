@@ -1,0 +1,23 @@
+name: 11b[llamado] - Reutilizable con NPM
+on: 
+  workflow_call:
+    inputs:
+      versiones-node:
+        required: false
+        type: string
+        default: "[ '18' , '20' ]"
+        description: "Versiones de NodeJS a usar"
+jobs:
+  build:
+    strategy:
+      matrix:
+        node-version: ${{ fromJson(inputs.versiones-node) }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup node enviroment
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm ci
+      - run: npm test
