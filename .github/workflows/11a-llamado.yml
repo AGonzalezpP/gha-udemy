@@ -1,0 +1,33 @@
+name: 11a[llamado] - Ejemplo Reutilizable
+on:
+  workflow_call:
+    inputs:
+      numero-dados:
+        required: true
+        type: sting
+        default: dos
+        description: "El número de dados que se vana a tirar. Valores aceptados: [uno, dos]"
+    outputs:
+      dado1:
+        description: "El valor del primer dado"
+        value: ${{ jobs.tirada.outputs.dado1 }}
+      dado2:
+        description: "El valor del segundo dado"
+        value: ${{ jobs.tirada.outputs.dado2 }}
+jobs:
+  tirada:
+    outputs:
+      dado1: ${{ steps.dado1.outputs.dado1 }}
+      dado2: ${{ steps.dado2.outputs.dado2 }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cuantos dados quieres tirar?
+        run: echo "hay ${{ inputs.numero-dados }} dados"
+      - name: Generar dado 1
+        id: dado1
+        run: echo "dado1=$((1 + RANDOM % 6))" >> "$GITHUB_OUTPUT"
+      - name: Generar dado 2
+        if: ${{ inputs.numero-dados == 'dos' }}
+        id: dado2
+        run: echo "dado2=$((1 + RANDOM % 6))" >> "$GITHUB_OUTPUT"
+    
