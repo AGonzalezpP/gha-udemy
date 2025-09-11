@@ -4,7 +4,7 @@ on:
     inputs:
       numero-dados:
         required: true
-        type: sting
+        type: string
         default: dos
         description: "El número de dados que se vana a tirar. Valores aceptados: [uno, dos]"
     outputs:
