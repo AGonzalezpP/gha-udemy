@@ -1,0 +1,15 @@
+name: 12a - Acción compuesta
+on:
+  push:
+    branches:
+      - main
+    workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - id: compuesta
+        uses: AGonzalezP/gha-composite-action@v1
+        with:
+          numero-dados: 'uno'
+      - run: echo dado 1 es ${{ steps.compuesta.outputs.dado-1 }}
